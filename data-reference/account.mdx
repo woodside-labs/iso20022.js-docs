@@ -1,0 +1,41 @@
+---
+title: 'Accounts'
+description: 'Accounts and Agents'
+icon: 'building-columns'
+---
+
+## Accounts and Agents
+
+### Account
+
+Represents either an IBAN account or a basic account.
+
+```typescript
+type Account = IBANAccount | BaseAccount;
+
+interface IBANAccount {
+  iban: string;
+}
+
+interface BaseAccount {
+  accountNumber: string;
+  accountType?: "checking" | "savings";
+}
+```
+
+### Agent
+
+Represents either a BIC or ABA identified financial agent.
+
+```typescript
+type Agent = BICAgent | ABAAgent;
+
+interface BICAgent {
+  bic: string;
+  bankAddress?: StructuredAddress;
+}
+
+interface ABAAgent {
+  routingNumber: string;
+}
+```

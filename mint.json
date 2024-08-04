@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/schema.json",
-  "name": "Starter Kit",
+  "name": "iso20022.js",
   "logo": {
     "dark": "/logo/dark.svg",
     "light": "/logo/light.svg"
@@ -18,68 +18,63 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "svapnil@woodside.sh"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Get Help",
+    "url": "mailto:svapnil@woodside.sh"
   },
   "tabs": [
     {
-      "name": "API Reference",
-      "url": "api-reference"
+      "name": "Data Reference",
+      "url": "data-reference"
     }
   ],
   "anchors": [
     {
-      "name": "Documentation",
-      "icon": "book-open-cover",
-      "url": "https://mintlify.com/docs"
+      "name": "Home",
+      "icon": "house",
+      "url": "https://iso20022js.com"
     },
     {
-      "name": "Community",
-      "icon": "slack",
-      "url": "https://mintlify.com/community"
+      "name": "NPM Package",
+      "icon": "npm",
+      "url": "https://www.npmjs.com/package/iso20022.js"
     },
     {
-      "name": "Blog",
-      "icon": "newspaper",
-      "url": "https://mintlify.com/blog"
+      "name": "GitHub",
+      "icon": "github",
+      "url": "https://github.com/svapnil/iso20022.js"
     }
   ],
   "navigation": [
     {
       "group": "Get Started",
       "pages": [
-        "introduction",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
-      "group": "Essentials",
+      "group": "Core",
       "pages": [
-        "essentials/markdown",
-        "essentials/code",
-        "essentials/images",
-        "essentials/settings",
-        "essentials/navigation",
-        "essentials/reusable-snippets"
+        "core/iso20022"
       ]
     },
     {
-      "group": "API Documentation",
+      "group": "Payment Initation (PAIN)",
       "pages": [
-        "api-reference/introduction"
+        "pain/swiftcredit"
       ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "Documentation",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "data-reference/overview",
+        "data-reference/payment-instruction",
+        "data-reference/party",
+        "data-reference/account",
+        "data-reference/address"
       ]
     }
   ],

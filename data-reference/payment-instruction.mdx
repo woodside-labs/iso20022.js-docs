@@ -1,0 +1,73 @@
+---
+title: 'Payment Instructions'
+description: 'How to format payment instructions'
+icon: 'money-bill'
+---
+
+### PaymentInstruction
+
+The base interface for all payment instructions.
+
+```typescript
+interface PaymentInstruction {
+  id?: string;
+  direction: 'credit' | 'debit';
+  amount: number;
+  currency: Currency;
+  debtor?: Party;
+  creditor?: Party;
+  remittanceInformation?: string;
+}
+```
+
+<ParamField body="id" type="string" optional>
+  Unique identifier for the payment instruction.
+</ParamField>
+
+<ParamField body="direction" type="string">
+  Indicates whether the payment is a credit or debit.
+</ParamField>
+
+<ParamField body="amount" type="number">
+  The amount of the payment.
+</ParamField>
+
+<ParamField body="currency" type="Currency">
+  The currency of the payment.
+</ParamField>
+
+<ParamField body="debtor" type="Party" optional>
+  The party from which the payment is debited.
+</ParamField>
+
+<ParamField body="creditor" type="Party" optional>
+  The party to which the payment is credited.
+</ParamField>
+
+<ParamField body="remittanceInformation" type="string" optional>
+  Additional information about the payment.
+</ParamField>
+
+### SWIFTCreditPaymentInstruction
+
+Extends `PaymentInstruction` for SWIFT credit payments.
+
+```typescript
+interface SWIFTCreditPaymentInstruction extends PaymentInstruction {
+  type: 'swift';
+  direction: 'credit';
+  creditor: Party;
+}
+```
+
+<ParamField body="type" type="string">
+  Specifies that this is a SWIFT payment.
+</ParamField>
+
+<ParamField body="direction" type="string">
+  Always 'credit' for SWIFT payments.
+</ParamField>
+
+<ParamField body="creditor" type="Party">
+  The party to which the payment is credited (required for SWIFT payments).
+</ParamField>

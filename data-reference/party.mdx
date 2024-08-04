@@ -1,0 +1,21 @@
+---
+title: 'Parties'
+description: 'A party involved in the transaction.'
+icon: 'person'
+---
+
+### Party
+
+Represents a party involved in a payment transaction. 
+
+In `iso20022.js` this is used to manage infomration about the initiating party (you), debter, and creditor which are present in all transactions.s
+
+```typescript
+interface Party {
+  id?: string;
+  name?: string;
+  address?: StructuredAddress;
+  account?: Account;
+  agent?: Agent;
+}
+```
