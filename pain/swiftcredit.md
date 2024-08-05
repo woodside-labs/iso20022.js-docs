@@ -1,6 +1,6 @@
 ---
-title: 'SWIFT Credits'
-description: 'SWIFT Credits'
+title: 'SWIFT Credit'
+description: 'SWIFT Credit'
 icon: 'globe'
 ---
 

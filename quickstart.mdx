@@ -1,10 +1,16 @@
 ---
 title: 'Quickstart'
-description: 'Learn how to preview changes locally'
+description: 'Learn how to use iso20022.js to create a SWIFT payment instruction'
 icon: 'rocket'
 ---
 
-Step 1. Install Mintlify on your OS:
+`iso20022.js` is a library for creating bank instructions using ISO20022, starting with creating SWIFT payment initiation messages.
+In this guide we will walk through the process of creating a SWIFT payment message and send it to a bank for processing.
+
+Acme Corporation is a company based in the US that is needs to send a SWIFT payment to Jane Smith in Germany. Acme's bank, like most in the world,
+can process SWIFT messages via ISO20022 XML format to move money programatically on their behalf.
+
+### Step 1. Install `iso20022.js` in your NPM project:
 
 <CodeGroup>
 
@@ -16,79 +22,92 @@ npm i iso20022.js
 yarn add iso20022.js
 ```
 
-</CodeGroup>
-
-Step 2. Go to the docs are located (where you can find `mint.json`) and run the following command:
-
-```bash
-mintlify dev
-```
-
-The documentation website is now available at `http://localhost:3000`.
-
-### Custom Ports
-
-Mintlify uses port 3000 by default. You can use the `--port` flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
-
-```bash
-mintlify dev --port 3333
-```
-
-You will see an error like this if you try to run Mintlify in a port that's already taken:
-
-```md
-Error: listen EADDRINUSE: address already in use :::3000
-```
-
-## Mintlify Versions
-
-Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
-
-<CodeGroup>
-
-```bash npm
-npm i -g mintlify@latest
-```
-
-```bash yarn
-yarn global upgrade mintlify
+```bash bun
+bun add iso20022.js
 ```
 
 </CodeGroup>
 
-## Deployment
 
-<Tip>
-  Unlimited editors available under the [Startup
-  Plan](https://mintlify.com/pricing)
-</Tip>
+### Step 2. Initialize your Client
 
-You should see the following if the deploy successfully went through:
+```typescript
+import { ISO20022 } from 'iso20022.js';
 
-<Frame>
-  <img src="/images/checks-passed.png" style={{ borderRadius: '0.5rem' }} />
-</Frame>
+const iso20022 = new ISO20022({
+    initiatingParty: {
+        name: 'Acme Corporation',
+        id: 'ACMECORP',
+        account: {
+            accountNumber: '123456789012',
+        },
+        agent: {
+            bic: 'CHASUS33',
+            bankAddress: {
+                country: 'US',
+            }
+        }
+    }
+});
+```
 
-## Troubleshooting
+The ISO20022 client represents the core information you need to send or receive structured ISO20022 messages correctly. 
+We need to define the initiating party, ourselves, including the bank information from which we are sending the payment from.
 
-Here's how to solve some common problems when working with the CLI.
+### Step 3: Create a SWIFT Payment Initiation Message
 
-<AccordionGroup>
-  <Accordion title="Mintlify is not loading">
-    Update to Node v18. Run `mintlify install` and try again.
-  </Accordion>
-  <Accordion title="No such file or directory on Windows">
-Go to the `C:/Users/Username/.mintlify/` directory and remove the `mint`
-folder. Then Open the Git Bash in this location and run `git clone
-https://github.com/mintlify/mint.git`.
+To send a SWIFT wire payment using iso20022.js, we need to create a `creditPaymentInitiation` object, which represents a payment initiation (`PAIN`) file.
 
-Repeat step 3.
+```typescript
+const creditPaymentInitiation = iso20022.createSWIFTCreditPaymentInitiation({
+    paymentInstructions: [{
+        type: 'swift',
+        direction: 'credit',
+        amount: 1000,
+        currency: 'USD',
+        creditor: {
+            name: 'Jane Smith',
+            account: {
+                iban: 'DE89370400440532013000'
+            },
+            agent: {
+                bic: 'DEUTDEFF',
+            },
+            address: {
+                streetName: "123 Main St",
+                townName: "Funkytown",
+                postalCode: "12345",
+                country: "DE",
+            }
+        }
+    }]
+});
+```
+Here are structuring a payment instruction on the behalf of Jane Smith. If you'd like to see more about the data models iso20022.js supports, check out the [Data Reference](/data-reference) page.
 
-  </Accordion>
-  <Accordion title="Getting an unknown error">
-    Try navigating to the root of your device and delete the ~/.mintlify folder.
-    Then run `mintlify dev` again.
-  </Accordion>
-</AccordionGroup>
+The `creditPaymentInitiation` object contains the information we need to format and send our XML instruction. Our next step is to relay this to Jane's bank.
 
-Curious about what changed in a CLI version? [Check out the CLI changelog.](/changelog/command-line)
+### Step 4: Send the Payment Initiation message to the bank
+
+Payments transmission is not supported by iso20022.js yet, but we can use off the shelf SFTP libraries to send the XML file to Acme's banking partner in the format they expect.
+
+```typescript
+import Client from 'ssh2-sftp-client';
+
+const sftp = new Client();
+
+sftp.connect({
+    host: process.env.SFTP_HOST,
+    port: 22,
+    username: process.env.SFTP_USERNAME,
+    password: process.env.SFTP_PASSWORD
+});
+
+await sftp.put(creditPaymentInitiation.toString(), '/ACMECORP_20240804123456_001');
+
+sftp.end();
+```
+
+<Card title="Talk to Us" icon="walkie-talkie" href="mailto:svapnil@woodside.sh">
+  If you find iso20022.js useful, please reach out to us. We'd love to hear from you.
+</Card>
