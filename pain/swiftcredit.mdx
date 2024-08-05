@@ -1,0 +1,72 @@
+---
+title: 'SWIFT Credit'
+description: 'SWIFT Credit'
+icon: 'globe'
+---
+
+# SWIFTCreditPaymentInitiation
+
+The `SWIFTCreditPaymentInitiation` class is used to generate SWIFT Credit Payment v3 Initiation messages (pain.001.001.03). 
+
+It can either be created from a base ISO20022 class or created competely independantly via the `SWIFTCreditPaymentInitiationConfig` interface.
+
+## Constructor
+
+```typescript
+export interface SWIFTCreditPaymentInitiationConfig {
+    initiatingParty: Party;
+    paymentInstructions: SWIFTCreditPaymentInstruction[];
+    messageId?: string;
+    creationDate?: Date;
+}
+
+// Example Usage
+const swiftPayment = new SWIFTCreditPaymentInitiation({
+    initiatingParty: {
+        name: 'Acme Corporation',
+        id: 'ACMECORP',
+        account: {
+            // Account details
+        },
+        agent: {
+            // Agent details
+        }
+    },
+    paymentInstructions: [
+        {
+            id: 'PAYMENT001',
+            amount: 100000, // Amount in cents
+            currency: 'USD',
+            creditor: {
+                // Creditor details
+            },
+            // Other payment instruction details
+        }
+    ],
+    messageId: 'MSG001', // Optional
+    creationDate: new Date() // Optional
+});
+```
+
+Initializes a new `SWIFTCreditPaymentInitiation` instance with the provided configuration.
+
+## Methods
+
+### serialize(): string
+
+Serializes the payment initiation to an XML string.
+
+```typescript
+const xmlString = swiftPayment.serialize();
+console.log(xmlString);
+```
+
+This method generates the complete XML representation of the SWIFT Credit Payment Initiation message.
+
+## Validation
+
+The class includes built-in validation to ensure the payment initiation data meets the required standards:
+
+- Validates that the `messageId` does not exceed 35 characters.
+- Ensures all creditors have complete addresses (including country).
+- Additional validations can be added as needed.

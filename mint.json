@@ -2,8 +2,8 @@
   "$schema": "https://mintlify.com/schema.json",
   "name": "iso20022.js",
   "logo": {
-    "dark": "/logo/dark.svg",
-    "light": "/logo/light.svg"
+    "dark": "/logo/logo.svg",
+    "light": "/logo/logo.svg"
   },
   "favicon": "/favicon.svg",
   "colors": {
@@ -22,7 +22,7 @@
     }
   ],
   "topbarCtaButton": {
-    "name": "Get Help",
+    "name": "Contact Us",
     "url": "mailto:svapnil@woodside.sh"
   },
   "tabs": [
