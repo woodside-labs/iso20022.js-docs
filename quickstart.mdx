@@ -1,14 +1,13 @@
 ---
 title: 'Quickstart'
-description: 'Learn how to use iso20022.js to create a SWIFT payment instruction'
+description: 'Learn how to use iso20022.js to create a SWIFT payment instruction in three lines of code.'
 icon: 'rocket'
 ---
 
-`iso20022.js` is a library for creating bank instructions using ISO20022, starting with creating SWIFT payment initiation messages.
-In this guide we will walk through the process of creating a SWIFT payment message and send it to a bank for processing.
-
 Acme Corporation is a company based in the US that needs to send a SWIFT payment to Jane Smith in Germany. Acme's bank, like most in the world,
-can process SWIFT messages via an ISO20022 XML file to move money programatically on their behalf.
+<a href="https://www.swift.com/standards/iso-20022/iso-20022-payments-financial-institutions">can process SWIFT messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
+
+<Info>In order to transmit bank payments programatically, you must have direct transmission enabled with your banking partner. If you have any questions about this, don't hesitate to <a href="https://calendar.app.google/CZjFSzyoDUAb67S36">reach out to us</a>.</Info>
 
 ### Step 1. Install `iso20022.js` in your NPM project:
 
@@ -108,6 +107,6 @@ await sftp.put(creditPaymentInitiation.toString(), '/ACMECORP_20240804123456_001
 sftp.end();
 ```
 
-<Card title="Talk to Us" icon="walkie-talkie" href="mailto:svapnil@woodside.sh">
+<Card title="Talk to Us" icon="walkie-talkie" href="https://calendar.app.google/CZjFSzyoDUAb67S36">
   If you find iso20022.js useful, please reach out to us. We'd love to hear from you.
 </Card>
