@@ -52,6 +52,7 @@
     {
       "group": "Get Started",
       "pages": [
+        "overview",
         "quickstart"
       ]
     },

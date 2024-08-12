@@ -1,0 +1,33 @@
+---
+title: 'Overview'
+description: 'Learn about ISO20022 and how to use this library'
+icon: 'book-open'
+---
+
+## Introduction
+
+This library was built to help companies communicate with banks using ISO20022 standards to move money or ingest financial data. Some examples of how companies may use `iso20022.js` include:
+
+- Sending SWIFT wires, SEPA payments, or ACH payments (pain.001)
+- Processing incoming bank statements (camt.052)
+- Finding the status of a payment (pain.013)
+
+The mission of this library is to connect the most widely used programming language to the most widely used payment standard. If there's a usecase that you're looking for, please email us at [svapnil@woodside.sh](mailto:svapnil@woodside.sh).
+
+<CardGroup cols={1}>
+  <Card title="Quickstart Guide" icon="rocket">
+    Get started quickly with our step-by-step guide on how to send a SWIFT wire using `iso20022.js`
+  </Card>
+</CardGroup>
+
+## Primer on ISO20022
+
+ISO20022 is a set of modern file-based messaging standards that allow a company to programatically communicate with their bank. You can use it to send payment or ingest financial data. Within the ISO20022 standard are a few namespaces that enabled different sets of capabilities.
+
+| Namespace | Capability |
+|-----------|------------|
+| Payment Initiation (pain)      | Used to initiate a payment from a company to a bank |
+| Cash Management (camt)      | Used to send or receive transactional information and balances from a bank |
+| Payments Clearing and Settlement (pacs)      | Used to settle payments between banks |
+
+There are many more namespaces of ISO20022, but this is what's currently supported by the library, which enabled companies to talk with banks to move money.
