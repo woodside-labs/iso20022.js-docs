@@ -69,6 +69,12 @@
       ]
     },
     {
+      "group": "Cash Management (CAMT)",
+      "pages": [
+        "camt/camt"
+      ]
+    },
+    {
       "group": "Documentation",
       "pages": [
         "data-reference/overview",
