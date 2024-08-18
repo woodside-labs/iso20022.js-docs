@@ -8,9 +8,13 @@ icon: 'book-open'
 
 This library was built to help companies communicate with banks using ISO20022 standards to move money or ingest financial data. Some examples of how companies may use `iso20022.js` include:
 
-- Creating SWIFT, SEPA, or ACH payment initiation messages (`pain.001`) to send to their bank
-- Receiving transactional information and balances (`camt.052`) to parse from their bank
-- Receiving payment status information (`pain.013`) to parse from their bank
+### Payment Initiation (PAIN)
+
+Create payment initiation XML files to [instruct your bank to send money on your behalf](/pain/swiftcredit).
+
+### Cash Management (CAMT)
+
+Ingest Cash Management XML files to [retrieve current day balances and transactional information](/camt/camt) from your bank.
 
 The mission of this library is to connect the most widely used programming language to the most widely used payment standard. If there's a usecase that you're looking for, please email us at [svapnil@woodside.sh](mailto:svapnil@woodside.sh).
 
@@ -22,7 +26,7 @@ The mission of this library is to connect the most widely used programming langu
 
 ## Primer on ISO20022
 
-ISO20022 is a set of modern file-based messaging standards that allow a company to programatically communicate with their bank. You can use it to send payment or ingest financial data. Within the ISO20022 standard are a few namespaces that enabled different sets of capabilities.
+ISO20022 is a set of modern file-based messaging standards that allow a company to programatically communicate with their bank. You can use it to send payment or ingest financial data. Within the ISO20022 standard are a few namespaces that enables different sets of capabilities.
 
 | Namespace | Capability |
 |-----------|------------|
@@ -30,4 +34,4 @@ ISO20022 is a set of modern file-based messaging standards that allow a company 
 | Cash Management (camt)      | Used to send or receive transactional information and balances from a bank |
 | Payments Clearing and Settlement (pacs)      | Used to settle payments between banks |
 
-There are many more namespaces of ISO20022, but this is what's currently supported by the library, which enabled companies to talk with banks to move money.
+There are many more namespaces of ISO20022, but this is what's currently supported by the library, which enables companies to talk with banks to move money.

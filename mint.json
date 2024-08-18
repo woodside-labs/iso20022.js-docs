@@ -63,7 +63,7 @@
       ]
     },
     {
-      "group": "Payment Initation (PAIN)",
+      "group": "Payment Initiation (PAIN)",
       "pages": [
         "pain/swiftcredit"
       ]

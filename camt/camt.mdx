@@ -1,12 +1,76 @@
 ---
 title: 'Cash Management'
-description: 'Cash Management'
+description: 'Cash Management End of Day Report (CAMT.053)'
 icon: 'wallet'
 ---
 
-# Cash Management
+# Cash Management End of Day Report (CAMT.053)
 
-Coming Soon..
+The `CashManagementEndOfDayReport` class represents a Cash Management End of Day Report (CAMT.053.x). This class encapsulates the data and functionality related to processing and accessing information from a CAMT.053 XML file.
+
+Unlike Payment Initation messages, you do not need an `iso20022` object to create them with, since all the relevant data is contained within the XML.
+
+## Usage
+
+To create a `CashManagementEndOfDayReport` instance from a raw XML string:
 
 
-Contact us at [svapnil@woodside.sh](mailto:svapnil@woodside.sh) if you're interested in using cash management tools with `iso20022.js`.
+```typescript
+import { CashManagementEndOfDayReport } from 'iso20022.js';
+const rawXml = '...'; // Your CAMT.053 XML string
+const report = CashManagementEndOfDayReport.fromXML(rawXml);
+```
+
+## Types
+
+For detailed information about the types used in this class (such as `Statement`, `Entry`, `Transaction`, and `Party`), please refer to the API documentation.
+
+
+## Properties
+
+- `messageId`: Gets the unique identifier for the message.
+- `recipient`: Gets the party receiving the report.
+- `creationDate`: Gets the date and time when the report was created.
+- `statements`: Gets all statements included in the report.
+- `transactions`: Retrieves all transactions from all statements in the report.
+- `entries`: Retrieves all entries from all statements in the report.
+
+## Methods
+
+### `static fromXML(rawXml: string): CashManagementEndOfDayReport`
+
+Creates a `CashManagementEndOfDayReport` instance from a raw XML string.
+
+- `rawXml`: The raw XML string containing the CAMT.053 data.
+- Returns: A new instance of `CashManagementEndOfDayReport`.
+- Throws: An error if the XML parsing fails or required data is missing.
+
+## Examples
+
+### Accessing report information
+
+```typescript
+const report = CashManagementEndOfDayReport.fromXML(rawXml);
+console.log(report.messageId);
+console.log(report.recipient);
+console.log(report.creationDate);
+```
+
+
+### Working with statements
+
+```typescript
+const report = CashManagementEndOfDayReport.fromXML(rawXml);
+report.statements.forEach(statement => {
+    console.log(statement.accountId);
+    console.log(statement.balances);
+});
+```
+
+
+### Retrieving all transactions
+
+```typescript
+const report = CashManagementEndOfDayReport.fromXML(rawXml);
+const transactions = report.transactions
+```
