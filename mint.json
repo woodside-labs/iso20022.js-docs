@@ -85,6 +85,11 @@
       ]
     }
   ],
+  "analytics": {
+    "koala": {
+      "publicApiKey": "pk_2b125de7709e0d1a31b71ef59bf685c7ea99"
+    }
+  },
   "footerSocials": {
     "x": "https://x.com/woodsidelabs",
     "github": "https://github.com/svapnil/iso20022.js",
