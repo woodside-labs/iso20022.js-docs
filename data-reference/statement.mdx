@@ -1,0 +1,104 @@
+---
+title: 'Statement'
+description: 'Represents a bank statement in the CAMT.053 format'
+icon: 'file-invoice-dollar'
+---
+
+### Statement
+
+The `Statement` interface represents a bank statement in the CAMT.053 format, containing detailed information about account transactions and balances.
+
+This is the parent interface for all information inside a CAMT.053 file. There usually is only one statement in the file, but the interface allows for multiple statements.
+
+We recommend using `transactions` and `balances` to relevant information from a CAMT.053 file.
+
+```typescript
+interface Statement {
+  id: string;
+  electronicSequenceNumber: number;
+  legalSequenceNumber: number;
+  creationDate: Date;
+  fromDate?: Date;
+  toDate?: Date;
+  account: Account;
+  agent: Agent;
+  numOfEntries?: number;
+  sumOfEntries?: number;
+  netAmountOfEntries?: number;
+  numOfCreditEntries?: number;
+  sumOfCreditEntries?: number;
+  numOfDebitEntries?: number;
+  sumOfDebitEntries?: number;
+  balances: Balance[];
+  entries: Entry[];
+}
+```
+
+
+<ParamField body="id" type="string">
+  Unique identifier for the statement.
+</ParamField>
+
+<ParamField body="electronicSequenceNumber" type="number">
+  Electronic sequence number of the statement.
+</ParamField>
+
+<ParamField body="legalSequenceNumber" type="number">
+  Legal sequence number of the statement.
+</ParamField>
+
+<ParamField body="creationDate" type="Date">
+  Date and time when the statement was created.
+</ParamField>
+
+<ParamField body="fromDate" type="Date" optional>
+  Start date of the statement period.
+</ParamField>
+
+<ParamField body="toDate" type="Date" optional>
+  End date of the statement period.
+</ParamField>
+
+<ParamField body="account" type="Account">
+  Account details for which the statement is generated.
+</ParamField>
+
+<ParamField body="agent" type="Agent">
+  Financial institution details.
+</ParamField>
+
+<ParamField body="numOfEntries" type="number" optional>
+  Total number of entries in the statement.
+</ParamField>
+
+<ParamField body="sumOfEntries" type="number" optional>
+  Sum of all entries in the statement.
+</ParamField>
+
+<ParamField body="netAmountOfEntries" type="number" optional>
+  Net amount of all entries in the statement.
+</ParamField>
+
+<ParamField body="numOfCreditEntries" type="number" optional>
+  Number of credit entries in the statement.
+</ParamField>
+
+<ParamField body="sumOfCreditEntries" type="number" optional>
+  Sum of all credit entries in the statement.
+</ParamField>
+
+<ParamField body="numOfDebitEntries" type="number" optional>
+  Number of debit entries in the statement.
+</ParamField>
+
+<ParamField body="sumOfDebitEntries" type="number" optional>
+  Sum of all debit entries in the statement.
+</ParamField>
+
+<ParamField body="balances" type="Balance[]">
+  Array of balance information.
+</ParamField>
+
+<ParamField body="entries" type="Entry[]">
+  Array of transaction entries.
+</ParamField>

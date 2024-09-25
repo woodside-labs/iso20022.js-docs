@@ -1,0 +1,80 @@
+---
+title: 'Transactions'
+description: 'Transactions in the CAMT.053 format'
+icon: 'money-from-bracket'
+---
+
+### Transactions
+
+The `Transaction` interface represents a transaction in the statement.
+
+```typescript
+export interface Transaction {
+  messageId?: string;
+  accountServicerReferenceId?: string;
+  paymentInformationId?: string;
+  instructionId?: string;
+  transactionId?: string;
+  instructedAmount?: number;
+  instructedCurrency?: Currency;
+  proprietaryPurpose?: string;
+  debtor?: Party;
+  creditor?: Party;
+  remittanceInformation?: string;
+  returnReason?: string;
+  returnAdditionalInformation?: string;
+}
+```
+
+
+<ParamField body="messageId" type="string" optional>
+  Unique message ID for the transaction.
+</ParamField>
+
+<ParamField body="accountServicerReferenceId" type="string" optional>
+  Reference ID assigned by the account servicer.
+</ParamField>
+
+<ParamField body="paymentInformationId" type="string" optional>
+  ID of the payment information.
+</ParamField>
+
+<ParamField body="instructionId" type="string" optional>
+  Instruction ID for the transaction.
+</ParamField>
+
+<ParamField body="transactionId" type="string" optional>
+  Unique transaction ID.
+</ParamField>
+
+<ParamField body="instructedAmount" type="number" optional>
+  Instructed amount for the transaction.
+</ParamField>
+
+<ParamField body="instructedCurrency" type="Currency" optional>
+  Currency of the instructed amount.
+</ParamField>
+
+<ParamField body="proprietaryPurpose" type="string" optional>
+  Proprietary purpose code for the transaction.
+</ParamField>
+
+<ParamField body="debtor" type="Party" optional>
+  Details of the debtor party.
+</ParamField>
+
+<ParamField body="creditor" type="Party" optional>
+  Details of the creditor party.
+</ParamField>
+
+<ParamField body="remittanceInformation" type="string" optional>
+  Additional information about the remittance.
+</ParamField>
+
+<ParamField body="returnReason" type="string" optional>
+  Reason for return, if applicable.
+</ParamField>
+
+<ParamField body="returnAdditionalInformation" type="string" optional>
+  Additional information about the return.
+</ParamField>

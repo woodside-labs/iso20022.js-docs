@@ -1,0 +1,58 @@
+---
+title: 'Entries'
+description: 'Entries in the CAMT.053 format'
+icon: 'money-bills'
+---
+
+### Entries
+
+One Entry in a cash management statement can contain multiple transactions.
+
+Usually CAMT files will contain a single entry with multiple transactions, but this can vary, for this reason we recommend using the `transactions` property to get all transactions for a given entry.
+
+The `Entry` interface represents a transaction entry in the statement. It can contain one or more individual transactions.
+
+```typescript
+export interface Entry {
+referenceId: string;
+creditDebitIndicator: 'credit' | 'debit';
+reversal: boolean;
+bookingDate: Date;
+amount: number;
+currency: Currency;
+proprietaryCode: string;
+  transactions: Transaction[];
+}
+```
+
+<ParamField body="referenceId" type="string">
+  Unique reference ID for the entry.
+</ParamField>
+
+<ParamField body="creditDebitIndicator" type="'credit' | 'debit'">
+  Indicates whether the entry is a credit or debit.
+</ParamField>
+
+<ParamField body="reversal" type="boolean">
+  Indicates if the entry is a reversal.
+</ParamField>
+
+<ParamField body="bookingDate" type="Date">
+  Date when the entry was booked.
+</ParamField>
+
+<ParamField body="amount" type="number">
+  Amount of the entry.
+</ParamField>
+
+<ParamField body="currency" type="Currency">
+  Currency of the entry.
+</ParamField>
+
+<ParamField body="proprietaryCode" type="string">
+  Proprietary code associated with the entry.
+</ParamField>
+
+<ParamField body="transactions" type="Transaction[]">
+  Array of individual transactions within this entry.
+</ParamField>

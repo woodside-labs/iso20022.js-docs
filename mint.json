@@ -77,11 +77,30 @@
     {
       "group": "Documentation",
       "pages": [
-        "data-reference/overview",
-        "data-reference/payment-instruction",
+        "data-reference/overview"
+      ]
+    },
+    {
+      "group": "Core Types",
+      "pages": [
         "data-reference/party",
         "data-reference/account",
         "data-reference/address"
+      ]
+    },
+    {
+      "group": "Payment Initiation",
+      "pages": [
+        "data-reference/payment-instruction"
+      ]
+    },
+    {
+      "group": "Cash Management",
+      "pages": [
+        "data-reference/statement",
+        "data-reference/balance",
+        "data-reference/entries",
+        "data-reference/transactions"
       ]
     }
   ],

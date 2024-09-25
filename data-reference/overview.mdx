@@ -8,6 +8,10 @@ icon: 'book-open'
 
 This page documents the core types used in our payment system. These types are essential for structuring payment instructions, defining parties involved in transactions, and specifying account and agent details.
 
+### Payment Initiation
+
+ISO200022 data models relevant to payment initation.
+
 <CardGroup cols={2}>
   <Card title="Payment Instructions" href="/data-reference/payment-instruction" icon="file-invoice-dollar">
     Learn about the structure and types used for payment instructions
@@ -20,5 +24,24 @@ This page documents the core types used in our payment system. These types are e
   </Card>
   <Card title="Addresses" href="/data-reference/address" icon="map-pin">
     Discover the address types for various entities
+  </Card>
+</CardGroup>
+
+### Cash Management
+
+ISO200022 data models relevant to cash management.
+
+<CardGroup cols={2}>
+  <Card title="Statements" href="/data-reference/statement" icon="file-invoice-dollar">
+    Learn about the structure and types used for statements
+  </Card>
+  <Card title="Balances" href="/data-reference/balance" icon="chart-simple">
+    Explore the balance types used in a statement
+  </Card>
+  <Card title="Entries" href="/data-reference/entries" icon="money-bills">
+    Understand the types used for entries in a statement
+  </Card>
+  <Card title="Transactions" href="/data-reference/transactions" icon="money-from-bracket">
+    Explore the transaction types used in a statement
   </Card>
 </CardGroup>
