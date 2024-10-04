@@ -65,7 +65,8 @@
     {
       "group": "Payment Initiation (PAIN)",
       "pages": [
-        "pain/swiftcredit"
+        "pain/swiftcredit",
+        "pain/payment-status-report"
       ]
     },
     {
@@ -91,7 +92,8 @@
     {
       "group": "Payment Initiation",
       "pages": [
-        "data-reference/payment-instruction"
+        "data-reference/payment-instruction",
+        "data-reference/payment-status"
       ]
     },
     {

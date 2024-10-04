@@ -1,0 +1,112 @@
+---
+title: 'Payment Status'
+description: 'Data types related to payment status'
+icon: 'signal-bars'
+---
+
+## PaymentStatusReport
+
+Usually a `PaymentStatusReport` has a single `StatusInformation` element, but some banks may return multiple elements. This class 
+handles both cases.
+
+<ParamField body="type" type="payment | group | transaction">
+  Returns the type of the first element in the report.
+</ParamField>
+
+<ParamField body="status" type="Status" optional>
+  Returns the status of the first element in the report.
+</ParamField>
+
+<ParamField body="statusInformation" type="StatusInformation">
+  The status information of the first element in the report.
+</ParamField>
+
+<ParamField body="statusInformations" type="StatusInformation[]">
+  The status information of the first element in the report.
+</ParamField>
+
+
+This document outlines the various data types and interfaces related to payment status reports.
+
+## OriginalGroupInformation
+
+Represents the original group information in a payment status report.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| originalMessageId | string | The original message ID associated with the group. |
+
+## StatusType
+
+Represents the type of status in a payment status report.
+
+Possible values: `'group'` | `'payment'` | `'transaction'`
+
+## PaymentStatusCode
+
+Represents the status codes in a payment status report.
+
+| Code | Description |
+|------|-------------|
+| RJCT | Rejected |
+| ACCP | Partially Accepted |
+| PNDG | Pending |
+| ACCP | Accepted |
+| ACSP | Accepted Settlement In Progress |
+| ACSC | Accepted Credit Settlement Completed |
+| ACSC | Accepted Settlement Completed |
+| ACTC | Accepted Technical Validation |
+
+For more information, see the [ISO 20022 External Code Sets](https://www.iso20022.org/sites/default/files/2022-03/externalcodesets_4q2021_v2_1.xlsx).
+
+## PaymentStatus
+
+A type representing the possible values of `PaymentStatusCode`.
+
+## BaseStatusInformation
+
+Represents the base structure for status information in a payment status report.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| type | StatusType | The type of status (group, payment, or transaction). |
+| status | PaymentStatus | The status value. |
+| reason? | object | Optional reason for the status. |
+| reason.code? | string | Optional reason code. |
+| reason.additionalInformation? | string | Optional additional information about the reason. |
+
+## GroupStatusInformation
+
+Represents the status information for a group in a payment status report. Extends `BaseStatusInformation`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| type | 'group' | The type is always 'group' for GroupStatus. |
+| originalMessageId | string | The original message ID associated with the group. |
+
+## PaymentStatusInformation
+
+Represents the status information for a payment in a payment status report. Extends `BaseStatusInformation`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| type | 'payment' | The type is always 'payment' for PaymentStatus. |
+| originalPaymentId | string | The original payment ID associated with the payment. |
+
+## TransactionStatusInformation
+
+Represents the status information for a transaction in a payment status report. Extends `BaseStatusInformation`.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| type | 'transaction' | The type is always 'transaction' for TransactionStatus. |
+| originalEndToEndId | string | The original end-to-end ID associated with the transaction. |
+
+## StatusInformation
+
+A union type of all possible status information types in a payment status report.
+
+Possible types:
+- `GroupStatusInformation`
+- `PaymentStatusInformation`
+- `TransactionStatusInformation`

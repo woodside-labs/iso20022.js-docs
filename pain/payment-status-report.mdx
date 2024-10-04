@@ -1,0 +1,37 @@
+---
+title: 'Payment Status Report'
+description: 'Payment Status Report (PAIN.002)'
+icon: 'file-invoice-dollar'
+---
+
+# Payment Status Report (PAIN.002)
+
+The `PaymentStatusReport` class represents a Payment Status Report (PAIN.002) in the PAIN.002 format. This
+class encapsulates the data and functionality related to ingesting updates about the status of a
+previously sent payment instruction.
+
+## Usage
+
+To create a `PaymentStatusReport` instance from a raw XML string:
+
+```typescript
+import { PaymentStatusReport } from 'iso20022.js';
+const xmlString = '<xml>...</xml>';
+const paymentStatusReport = PaymentStatusReport.fromXML(xmlString);
+```
+
+A `PaymentStatusReport` has a list of `StatusInformation` elements, each of which has a `type` and a `status` field.
+
+The first `StatusInformation` element in the list is also accessible as `paymentStatusReport.type` and `paymentStatusReport.status`.
+
+## Example
+
+```typescript
+if (paymentStatusReport.type === PaymentStatusCode.Accepted) {
+    console.log("Payment Accepted");
+} else if (paymentStatusReport.type === PaymentStatusCode.Rejected) {
+    console.log("Payment Rejected");
+} else if (paymentStatusReport.type === PaymentStatusCode.Pending) {
+    console.log("Payment Pending");
+}
+```
