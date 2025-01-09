@@ -66,6 +66,7 @@
       "group": "Payment Initiation (PAIN)",
       "pages": [
         "pain/swiftcredit",
+        "pain/sepacredit",
         "pain/payment-status-report"
       ]
     },
