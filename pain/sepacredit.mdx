@@ -12,10 +12,75 @@ The `SEPACreditPaymentInitiation` class is used to generate SEPA Credit Payment 
 
 It can be created via the `SEPACreditPaymentInitiationConfig` interface.
 
+## Constructor
 
-<Warning>
-**Work in Progress**
+```typescript
+// Example Usage
+const config: SEPACreditPaymentInitiationConfig = {
+    initiatingParty: {
+        name: 'Electrical',
+        id: 'ELECTRIC',
+        account: {
+            iban: 'ES9121000418450200051332'
+        },
+        agent: {
+            bic: 'BSCHESMMXXX',
+            bankAddress: {
+                country: 'US'
+            }
+        }
+    },
+    paymentInstructions: [
+        {
+            type: 'sepa',
+            direction: 'credit',
+            creditor: {
+                name: 'Dáel Muñiz',
+                account: {
+                    iban: 'ES8201822200150201504058'
+                },
+                agent: {
+                    bic: 'BBVAESMMXXX'
+                },
+                address: {
+                    streetName: 'Calle de Serrano',
+                    buildingNumber: '41',
+                    townName: 'Madrid',
+                    countrySubDivision: 'Madrid',
+                    postalCode: '28001',
+                    country: 'ES'
+                }
+            },
+            amount: 1000,
+            currency: 'EUR'
+        }
+    ]
+}
 
-Support for SEPA is currently in active development. Please check back later for updates or reach out to the team if you have any questions.
-</Warning>
+const sepa = new SEPACreditPaymentInitiation(config)
+```
 
+Initializes a new `SEPACreditPaymentInitiation` instance with the provided configuration.
+
+## Methods
+
+### serialize(): string
+
+```typescript
+const xmlString = sepa.serialize();
+console.log(xmlString);
+```
+
+Serializes the `SEPACreditPaymentInitiation` instance into an XML string representation. The resulting XML string can be used to send the payment to the bank.
+
+### toString(): string
+
+Alias for `serialize()`.
+
+## Validation
+
+The class includes built-in validation to ensure the payment initiation data meets the required standards:
+
+- `messageId` should not exceed 35 characters.
+- All payment instructions must have a consistent currency.
+- All creditors must have a complete address (including country).

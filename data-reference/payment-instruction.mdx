@@ -71,3 +71,29 @@ interface SWIFTCreditPaymentInstruction extends PaymentInstruction {
 <ParamField body="creditor" type="Party">
   The party to which the payment is credited (required for SWIFT payments).
 </ParamField>
+
+### SEPACreditPaymentInstruction
+
+Extends `PaymentInstruction` for SWIFT credit payments.
+
+```typescript
+interface SEPACreditPaymentInstruction extends PaymentInstruction {
+  type: 'sepa';
+  direction: 'credit';
+  creditor: Party;
+}
+```
+
+<ParamField body="type" type="string">
+  Specifies that this is a SEPA payment.
+</ParamField>
+
+<ParamField body="direction" type="string">
+  Only 'credit' is currently supported for SEPA payments currently. For support for debits, please reach out to the team (iso20022js@woodside.sh).
+</ParamField>
+
+<ParamField body="creditor" type="Party">
+  The party to which the payment is credited (required for SEPA payments).
+
+  For SEPA payments, the creditor party must be a `Party` object with a optional `bic` (Bank Identifier Code) agent and `iban` account.
+</ParamField>
