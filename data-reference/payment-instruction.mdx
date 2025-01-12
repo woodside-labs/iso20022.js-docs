@@ -26,6 +26,9 @@ interface PaymentInstruction {
 
 <ParamField body="direction" type="string">
   Indicates whether the payment is a credit or debit.
+
+  - `credit`: This is for **outgoing "push" payments**. The originator is the debtor and recipient is the creditor.
+  - `debit`: This is for **incoming "pull" payments**. The originator is the creditor and recipient is the debtor.
 </ParamField>
 
 <ParamField body="amount" type="number">
