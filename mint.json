@@ -18,7 +18,7 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "iso20022js@woodside.sh"
+      "url": "mailto:iso20022js@woodside.sh"
     }
   ],
   "topbarCtaButton": {
@@ -65,8 +65,8 @@
     {
       "group": "Payment Initiation (PAIN)",
       "pages": [
-        "pain/swiftcredit",
         "pain/sepacredit",
+        "pain/swiftcredit",
         "pain/payment-status-report"
       ]
     },
