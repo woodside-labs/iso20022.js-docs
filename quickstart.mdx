@@ -7,6 +7,8 @@ icon: 'rocket'
 Electrical is a company based in Spain that needs to send a SEPA payment to Kylian Mbappé, also in Spain. Electrical's bank, like most in Europe,
 <a href="https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html">can process SEPA messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
 
+At the end of the tutorial, we'll demonstrate how to store and upload the payment message to the bank using [Fiat Web Services](/quickstart#step-4-save-the-payment-using-fiat-web-services-and-upload-to-bank).
+
 <Info>In order to transmit bank payments programatically, you must have direct transmission enabled with your corporate bank. If you have any questions about this, don't hesitate to reach out to <a href="mailto:payments@woodside.sh">payments@woodside.sh</a>.</Info>
 
 ### Step 1. Install `iso20022.js` in your NPM project:
@@ -77,26 +79,13 @@ Here we are structuring a payment instruction on the behalf of Kylian Mbappé. I
 
 The `creditPaymentInitiation` object contains the information we need to format and send our XML instruction. Our next step is to relay this to the recipient's bank.
 
-### Step 4: Send the Payment Initiation message to the bank
+### Step 4: Save the Payment using Fiat Web Services and Upload to Bank
 
-Payments transmission is not supported by iso20022.js yet, but we can use off the shelf SFTP libraries to send the XML file to Electrical's banking partner in the format they expect.
+In order to execute the ISO20022 message at the bank, the message needs to be saved and uploaded onto the bank. Typically this is done with a bank portal that is on file.
 
-```typescript
-import Client from 'ssh2-sftp-client';
+You can use Fiat Web Services to save, track, and send the XML file to your bank. Sign up for [Fiat Web Services here.](https://fiatwebservices.com)
 
-const sftp = new Client();
-
-sftp.connect({
-    host: process.env.SFTP_HOST,
-    port: 22,
-    username: process.env.SFTP_USERNAME,
-    password: process.env.SFTP_PASSWORD
-});
-
-await sftp.put(creditPaymentInitiation.toString(), '/ELECTRIC_20240804123456_001');
-
-sftp.end();
-```
+[![Fiat Web Services](/images/chrome.svg)](https://fiatwebservices.com)
 
 <Card title="Talk to Us" icon="walkie-talkie" href="https://cal.com/woodside/iso20022js">
   If you find iso20022.js useful, please reach out to us. We'd love to hear from you.
