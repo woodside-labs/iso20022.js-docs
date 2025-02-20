@@ -1,0 +1,130 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "iso20022.js",
+  "colors": {
+    "primary": "#0D9373",
+    "light": "#07C983",
+    "dark": "#0D9373"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "overview",
+              "quickstart"
+            ]
+          },
+          {
+            "group": "Core",
+            "pages": [
+              "core/iso20022"
+            ]
+          },
+          {
+            "group": "Payment Initiation (PAIN)",
+            "pages": [
+              "pain/sepacredit",
+              "pain/swiftcredit",
+              "pain/payment-status-report"
+            ]
+          },
+          {
+            "group": "Cash Management (CAMT)",
+            "pages": [
+              "camt/camt"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Data Reference",
+        "groups": [
+          {
+            "group": "Documentation",
+            "pages": [
+              "data-reference/overview"
+            ]
+          },
+          {
+            "group": "Core Types",
+            "pages": [
+              "data-reference/party",
+              "data-reference/account",
+              "data-reference/address"
+            ]
+          },
+          {
+            "group": "Payment Initiation",
+            "pages": [
+              "data-reference/payment-instruction",
+              "data-reference/payment-status"
+            ]
+          },
+          {
+            "group": "Cash Management",
+            "pages": [
+              "data-reference/statement",
+              "data-reference/balance",
+              "data-reference/entries",
+              "data-reference/transactions"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Home",
+          "href": "https://iso20022js.com",
+          "icon": "house"
+        },
+        {
+          "anchor": "NPM Package",
+          "href": "https://www.npmjs.com/package/iso20022.js",
+          "icon": "npm"
+        },
+        {
+          "anchor": "GitHub",
+          "href": "https://github.com/svapnil/iso20022.js",
+          "icon": "github"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/logo.svg",
+    "dark": "/logo/logo.svg"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:iso20022js@woodside.sh"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Contact Us",
+      "href": "https://cal.com/woodside/iso20022js"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/woodsidelabs",
+      "github": "https://github.com/svapnil/iso20022.js",
+      "linkedin": "https://www.linkedin.com/company/100965433"
+    }
+  },
+  "integrations": {
+    "koala": {
+      "publicApiKey": "pk_2b125de7709e0d1a31b71ef59bf685c7ea99"
+    }
+  }
+}
