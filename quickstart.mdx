@@ -4,7 +4,7 @@ description: 'Learn how to use iso20022.js to create a SEPA payment instruction 
 icon: 'rocket'
 ---
 
-Electrical is a company based in Spain that needs to send a SEPA payment to Kylian Mbappé, also in Spain. Electrical's bank, like most in Europe,
+Madrid Energy is a company based in Spain that needs to send a SEPA payment to Kylian Mbappé, also in Spain. Madrid Energy's bank, like most in Europe,
 <a href="https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html">can process SEPA messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
 
 At the end of the tutorial, we'll demonstrate how to store and upload the payment message to the bank using [Fiat Web Services](/quickstart#step-4-save-the-payment-using-fiat-web-services-and-upload-to-bank).
@@ -37,7 +37,7 @@ import { ISO20022 } from 'iso20022.js';
 
 const iso20022 = new ISO20022({
     initiatingParty: {
-        name: 'Electrical',
+        name: 'Madrid Energy',
         id: 'ELECTRIC',
         account: {
             iban: 'ES9121000418450200051332'
