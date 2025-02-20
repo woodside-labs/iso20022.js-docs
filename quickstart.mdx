@@ -1,11 +1,11 @@
 ---
 title: 'Quickstart'
-description: 'Learn how to use iso20022.js to create a SWIFT payment instruction in three lines of code.'
+description: 'Learn how to use iso20022.js to create a SEPA payment instruction in three lines of code.'
 icon: 'rocket'
 ---
 
-Acme Corporation is a company based in the US that needs to send a SWIFT payment to Jane Smith in Germany. Acme's bank, like most in the world,
-<a href="https://www.swift.com/standards/iso-20022/iso-20022-payments-financial-institutions">can process SWIFT messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
+Electrical is a company based in Spain that needs to send a SEPA payment to Kylian Mbappé, also in Spain. Electrical's bank, like most in Europe,
+<a href="https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html">can process SEPA messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
 
 <Info>In order to transmit bank payments programatically, you must have direct transmission enabled with your corporate bank. If you have any questions about this, don't hesitate to reach out to <a href="mailto:payments@woodside.sh">payments@woodside.sh</a>.</Info>
 
@@ -35,15 +35,15 @@ import { ISO20022 } from 'iso20022.js';
 
 const iso20022 = new ISO20022({
     initiatingParty: {
-        name: 'Acme Corporation',
-        id: 'ACMECORP',
+        name: 'Electrical',
+        id: 'ELECTRIC',
         account: {
-            accountNumber: '123456789012',
+            iban: 'ES9121000418450200051332'
         },
         agent: {
-            bic: 'CHASUS33',
+            bic: 'BSCHESMMXXX',
             bankAddress: {
-                country: 'US',
+                country: 'ES',
             }
         }
     }
@@ -53,42 +53,33 @@ const iso20022 = new ISO20022({
 The ISO20022 client represents the core information you need to send or receive structured ISO20022 messages correctly. 
 We need to define the initiating party, ourselves, including the bank information from which we are sending the payment from.
 
-### Step 3: Create a SWIFT Payment Initiation Message
+### Step 3: Create a SEPA Payment Initiation Message
 
-To send a SWIFT wire payment using iso20022.js, we need to create a `creditPaymentInitiation` object, which represents a payment initiation (`PAIN`) file.
+To send a SEPA payment using iso20022.js, we need to create a `creditPaymentInitiation` object, which represents a payment initiation (`PAIN`) file.
 
 ```typescript
-const creditPaymentInitiation = iso20022.createSWIFTCreditPaymentInitiation({
+const creditPaymentInitiation = iso20022.createSEPACreditPaymentInitiation({
     paymentInstructions: [{
-        type: 'swift',
+        type: 'sepa',
         direction: 'credit',
         amount: 1000,
-        currency: 'USD',
+        currency: 'EUR',
         creditor: {
-            name: 'Jane Smith',
+            name: 'Kylian Mbappé',
             account: {
-                iban: 'DE89370400440532013000'
+                iban: 'ES8201822200150201504058'
             },
-            agent: {
-                bic: 'DEUTDEFF',
-            },
-            address: {
-                streetName: "123 Main St",
-                townName: "Funkytown",
-                postalCode: "12345",
-                country: "DE",
-            }
         }
     }]
 });
 ```
-Here are structuring a payment instruction on the behalf of Jane Smith. If you'd like to see more about the data models iso20022.js supports, check out the [Data Reference](/data-reference) page.
+Here we are structuring a payment instruction on the behalf of Kylian Mbappé. If you'd like to see more about the data models iso20022.js supports, check out the [Data Reference](/data-reference) page.
 
-The `creditPaymentInitiation` object contains the information we need to format and send our XML instruction. Our next step is to relay this to Jane's bank.
+The `creditPaymentInitiation` object contains the information we need to format and send our XML instruction. Our next step is to relay this to the recipient's bank.
 
 ### Step 4: Send the Payment Initiation message to the bank
 
-Payments transmission is not supported by iso20022.js yet, but we can use off the shelf SFTP libraries to send the XML file to Acme's banking partner in the format they expect.
+Payments transmission is not supported by iso20022.js yet, but we can use off the shelf SFTP libraries to send the XML file to Electrical's banking partner in the format they expect.
 
 ```typescript
 import Client from 'ssh2-sftp-client';
@@ -102,7 +93,7 @@ sftp.connect({
     password: process.env.SFTP_PASSWORD
 });
 
-await sftp.put(creditPaymentInitiation.toString(), '/ACMECORP_20240804123456_001');
+await sftp.put(creditPaymentInitiation.toString(), '/ELECTRIC_20240804123456_001');
 
 sftp.end();
 ```
