@@ -29,6 +29,7 @@
           {
             "group": "Payment Initiation (PAIN)",
             "pages": [
+              "pain/rtpcredit",
               "pain/sepacredit",
               "pain/swiftcredit",
               "pain/payment-status-report"
