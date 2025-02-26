@@ -1,0 +1,77 @@
+---
+title: 'RTP Credit'
+description: 'RTP Credit'
+icon: 'globe'
+---
+
+# RTPCreditPaymentInitiation
+
+<Info>If you want to learn mroe about RTP (U.S. Real-Time Payments), please refer to the <a href="https://www.theclearinghouse.org/payment-systems/rtp">Official Clearing House website</a>.</Info>
+
+The `RTPCreditPaymentInitiation` class is used to generate RTP Credit Payment Initiation messages. These are primarily used for real-time payment transfers within the United States banking system.
+
+It can be created via the `RTPCreditPaymentInitiationConfig` interface.
+
+## Constructor
+
+```typescript
+// Example Usage
+const config: RTPCreditPaymentInitiationConfig = {
+    initiatingParty: {
+        name: 'Acme Corporation',
+        id: 'ACMECORP',
+        account: {
+            accountNumber: '987654321098'
+        },
+        agent: {
+            abaRoutingNumber: '122105155'
+        }
+    },
+    paymentInstructions: [
+        {
+            type: 'rtp',
+            direction: 'credit',
+            amount: 100000, // $1000.00
+            currency: 'USD',
+            creditor: {
+                name: 'All-American Dogs Co.',
+                account: {
+                    accountNumber: '123456789012',
+                },
+                agent: {
+                    abaRoutingNumber: '37714568112',
+                }
+            },
+            remittanceInformation: '1000 Hot Dogs Feb26',
+        }
+    ]
+}
+
+const rtp = new RTPCreditPaymentInitiation(config)
+```
+
+Initializes a new `RTPCreditPaymentInitiation` instance with the provided configuration.
+
+## Methods
+
+### serialize(): string
+
+```typescript
+const xmlString = rtp.serialize();
+console.log(xmlString);
+```
+
+Serializes the `RTPCreditPaymentInitiation` instance into an XML string representation. The resulting XML string can be used to send the payment to the bank.
+
+### toString(): string
+
+Alias for `serialize()`.
+
+## Validation
+
+The class includes built-in validation to ensure the payment initiation data meets the required standards:
+
+- Account numbers must be valid for US banking.
+- ABA routing numbers must be valid and properly formatted.
+- All payment instructions must have USD as the currency.
+- Amount values should be specified in cents (e.g., 100000 for $1000.00).
