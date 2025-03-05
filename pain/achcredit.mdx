@@ -1,0 +1,87 @@
+---
+title: 'ACH Credit'
+description: 'Create an ACH Credit Payment Initiation message'
+icon: 'university'
+---
+
+# ACHCreditPaymentInitiation
+
+<Info>If you want to learn more about ACH (Automated Clearing House), please refer to the <a href="https://www.nacha.org/">Official NACHA website</a>.</Info>
+
+The `ACHCreditPaymentInitiation` class is used to generate ACH Credit Payment Initiation messages. These are primarily used for electronic funds transfers within the United States banking system.
+
+It can be created via the `ACHCreditPaymentInitiationConfig` interface.
+
+## Constructor
+
+```typescript
+// Example Usage
+const config: ACHCreditPaymentInitiationConfig = {
+    initiatingParty: {
+        name: 'John Doe Corporation',
+        id: 'JOHNDOE99',
+        account: {
+            accountNumber: '0123456789'
+        },
+        agent: {
+            abaRoutingNumber: '123456789'
+        }
+    },
+    paymentInstructions: [
+        {
+            type: 'ach',
+            direction: 'credit',
+            amount: 100000, // $1000.00
+            currency: 'USD',
+            creditor: {
+                name: 'John Doe Funding LLC',
+                account: {
+                    accountNumber: '0123456789'
+                },
+                agent: {
+                    abaRoutingNumber: '0123456789'
+                }
+            },
+            remittanceInformation: 'Invoice #12345',
+        }
+    ],
+    localInstrument: 'CCD' // Optional, defaults to CCD (Corporate Credit or Debit)
+}
+
+const ach = new ACHCreditPaymentInitiation(config)
+```
+
+Initializes a new `ACHCreditPaymentInitiation` instance with the provided configuration.
+
+## Methods
+
+### serialize(): string
+
+```typescript
+const xmlString = ach.serialize();
+console.log(xmlString);
+```
+
+Serializes the `ACHCreditPaymentInitiation` instance into an XML string representation. The resulting XML string can be used to send the payment to the bank.
+
+### toString(): string
+
+Alias for `serialize()`.
+
+### static fromXML(rawXml: string): ACHCreditPaymentInitiation
+
+```typescript
+const achPayment = ACHCreditPaymentInitiation.fromXML(xmlString);
+```
+
+Creates a new `ACHCreditPaymentInitiation` instance from an XML string.
+
+## Validation
+
+The class includes built-in validation to ensure the payment initiation data meets the required standards:
+
+- Message ID must not exceed 35 characters.
+- All payment instructions must have USD as the currency.
+- Amount values should be specified in cents (e.g., 100000 for $1000.00).
+- ABA routing numbers must be valid and properly formatted.
+- Account numbers must be valid for US banking.

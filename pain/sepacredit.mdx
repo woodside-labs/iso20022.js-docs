@@ -42,7 +42,7 @@ const config: SEPACreditPaymentInitiationConfig = {
                     iban: 'ES8201822200150201504058'
                 },
             },
-            amount: 1000,
+            amount: 1000, // €10.00
             currency: 'EUR'
         }
     ]
@@ -75,3 +75,4 @@ The class includes built-in validation to ensure the payment initiation data mee
 - `messageId` should not exceed 35 characters.
 - All payment instructions must have a consistent currency.
 - All creditors must have a complete address (including country).
+- Amount values should be specified in cents (e.g., 1000 for €10.00).
