@@ -78,6 +78,10 @@
             ]
           }
         ]
+      },
+      {
+        "tab": "Fiat Web Services",
+        "openapi": "openapi.documented.json"
       }
     ],
     "global": {
