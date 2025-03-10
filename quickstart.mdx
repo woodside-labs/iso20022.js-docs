@@ -7,7 +7,7 @@ icon: 'rocket'
 Madrid Energy is a company based in Spain that needs to send a SEPA payment to Kylian Mbappé, also in Spain. Madrid Energy's bank, like most in Europe,
 <a href="https://www.ecb.europa.eu/paym/integration/retail/sepa/html/index.en.html">can process SEPA messages via ISO20022</a> to move money programatically on their behalf. We'll use `iso20022.js` to do this.
 
-At the end of the tutorial, we'll demonstrate how to store and upload the payment message to the bank using [Fiat Web Services](/quickstart#step-4-save-the-payment-using-fiat-web-services-and-upload-to-bank).
+At the end of the tutorial, we'll demonstrate how to store and send the payment message to the bank using [Fiat Web Services](/quickstart#step-4-save-the-payment-using-fiat-web-services-and-upload-to-bank).
 
 <Info>In order to transmit bank payments programatically, you must have direct transmission enabled with your corporate bank. If you have any questions about this, don't hesitate to reach out to <a href="mailto:payments@woodside.sh">payments@woodside.sh</a>.</Info>
 
@@ -29,8 +29,34 @@ bun add iso20022.js
 
 </CodeGroup>
 
+You should also install `fiatwebservices` to save and upload the payment message to the bank.
 
-### Step 2. Initialize your Client
+<CodeGroup>
+
+```bash npm
+npm i fiatwebservices
+```
+
+```bash yarn
+yarn add fiatwebservices
+```
+
+```bash bun
+bun add fiatwebservices
+```
+
+</CodeGroup>
+
+```typescript
+import { FiatWebServices } from 'fiatwebservices';
+
+const fiatWebServices = new Fiatwebservices({
+    apiKey: process.env['FWS_API_KEY'],
+});
+```
+
+
+### Step 2. Initialize Your Initiating Party
 
 ```typescript
 import { ISO20022 } from 'iso20022.js';
@@ -60,7 +86,7 @@ We need to define the initiating party, ourselves, including the bank informatio
 To send a SEPA payment using iso20022.js, we need to create a `creditPaymentInitiation` object, which represents a payment initiation (`PAIN`) file.
 
 ```typescript
-const creditPaymentInitiation = iso20022.createSEPACreditPaymentInitiation({
+const payment = iso20022.createSEPACreditPaymentInitiation({
     paymentInstructions: [{
         type: 'sepa',
         direction: 'credit',
@@ -81,9 +107,11 @@ The `creditPaymentInitiation` object contains the information we need to format 
 
 ### Step 4: Save the Payment using Fiat Web Services and Upload to Bank
 
-In order to execute the ISO20022 message at the bank, the message needs to be saved and uploaded onto the bank. Typically this is done with a bank portal that is on file.
-
 You can use Fiat Web Services to save, track, and send the XML file to your bank.
+
+```typescript
+fiatWebServices.transfers.sepa.create(payment.serialize())
+```
 
 [Sign up for Fiat Web Services here.](https://fiatwebservices.com)
 
